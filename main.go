@@ -18,7 +18,28 @@ type Response struct {
 }
 
 
+func HandleLatest(w http.ResponseWriter, r *http.Request){
+	if r.Method == "POST" {
+		var info map[string]interface{}
 
+		err:= json.NewDecoder(r.Body).Decode(&info)
+
+		if err!= nil {
+			Fprint(w, "error decoding")
+		}
+	}
+
+
+
+
+
+
+
+
+	else {
+		Fprint(w, "only post implemented")
+	}
+}
 
 
 
@@ -36,7 +57,8 @@ type Response struct {
 
 func main () {
 
-
+http.HandleFunc("/latest", HandleLatest)
+http.ListenAndServe(":" +os.Getenv("PORT"), nil)
 
 }
 
